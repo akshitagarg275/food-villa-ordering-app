@@ -1,0 +1,19 @@
+{
+  "name": "foodvilla",
+  "version": "1.0.0",
+  "description": "Swiggy like food ordering app",
+  "scripts": {
+    "start": "parcel index.html",
+    "build" : "parcl build index.html",
+    "test": "jest"
+  },
+  "author": "akshita garg",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  }
+}
