@@ -1,11 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import HeaderComponent from "./src/components/HeaderComponent";
+import BodyComponent from "./src/components/BodyComponent";
 
-const heading = <h1>H1 heading using JSX</h1>
 
-const HeadingComponent = () => {
-    return (<h2>Heading JS component</h2>);
+const AppLayout = () => {
+    return (
+        <div className='app'>
+            <HeaderComponent/>
+            <BodyComponent/>
+        </div>
+    )
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<HeadingComponent/>);
+root.render(<AppLayout/>);
