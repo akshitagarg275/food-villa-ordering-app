@@ -43,3 +43,13 @@
     gap: 20px;
     padding: 20px;
 }
+
+.search-container {
+    padding: 20px;
+}
+
+.top-rated-btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 13px;
+}
