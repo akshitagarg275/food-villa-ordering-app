@@ -1,7 +1,7 @@
 import { DUMMY_IMAGE_URL } from "../utils/constants"
 
 const RestaurantCard = ({ resData }) => {
-    console.log("RestaurantCard rendered : ", resData)
+    // console.log("RestaurantCard rendered : ", resData)
     return (
         <div className="restaurant-card">
             <img src={DUMMY_IMAGE_URL} alt="Restaurant" />

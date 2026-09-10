@@ -5,6 +5,8 @@ import { resList } from "../utils/restaurant_mock"
 const BodyComponent = () => {
 
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
+    const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+    const [searchText, setSearchText] = useState("");
 
     const topRatesRetaurants = () => {
         console.log("Top rated restaurants");
@@ -22,16 +24,25 @@ const BodyComponent = () => {
         const json = await data.json()
         console.log(json.data.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
         setListOfRestaurants(json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+        setFilteredRestaurants(json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+
+    }
+
+    const searchFunctionality = () => {
+
+        const filterList = filteredRestaurants.filter((res) => res?.info?.name?.toLowerCase()?.includes(searchText.toLowerCase()))
+        setListOfRestaurants(filterList)
     }
 
 
-    console.log("Body rendered")
+    // console.log("Body rendered")
     return listOfRestaurants.length === 0 ? (
         <ShimmerComponent/>
     ) :  (
         <div className="body">
             <div className="search-container">
-                Search
+                <input type="text" className="search-input" placeholder="Search for restaurants" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+                <button className="search-btn" onClick={searchFunctionality}>Search</button>
                 <div>
                     <button className="top-rated-btn" onClick={topRatesRetaurants }>Top Rated Restaurants</button>
                 </div>
