@@ -1,5 +1,6 @@
 import React , {useState, useEffect} from "react"
 import RestaurantCard from "./RestaurantCard"
+import ShimmerComponent from "./ShimmerComponent"
 import { resList } from "../utils/restaurant_mock"
 const BodyComponent = () => {
 
@@ -21,6 +22,10 @@ const BodyComponent = () => {
         const json = await data.json()
         console.log(json.data.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
         setListOfRestaurants(json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+    }
+
+    if(listOfRestaurants.length === 0) {
+        return <ShimmerComponent/>
     }
 
     console.log("Body rendered")
