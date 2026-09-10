@@ -24,12 +24,11 @@ const BodyComponent = () => {
         setListOfRestaurants(json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
     }
 
-    if(listOfRestaurants.length === 0) {
-        return <ShimmerComponent/>
-    }
 
     console.log("Body rendered")
-    return (
+    return listOfRestaurants.length === 0 ? (
+        <ShimmerComponent/>
+    ) :  (
         <div className="body">
             <div className="search-container">
                 Search

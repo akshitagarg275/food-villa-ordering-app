@@ -68,3 +68,12 @@
     animation: shimmer 1.5s infinite linear;
     margin-right: 5px;
 }
+
+.sign-in-btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #69c940;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
