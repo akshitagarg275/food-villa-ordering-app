@@ -1,16 +1,29 @@
-import React , {useState} from "react"
+import React , {useState, useEffect} from "react"
 import RestaurantCard from "./RestaurantCard"
-import {resList} from "../utils/restaurant_mock";
+import { resList } from "../utils/restaurant_mock"
 const BodyComponent = () => {
-    console.log(resList);
 
-    const [listOfRestaurants, setListOfRestaurants] = useState(resList);
+    const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
     const topRatesRetaurants = () => {
         console.log("Top rated restaurants");
         resList2 = resList.filter((res) => (Number(res?.data?.avgRating) > 4.0));
         setListOfRestaurants(resList2);
     }
+
+    useEffect(()=> {
+        console.log('useEffect called')
+        fetchData()
+    },[])
+
+    const fetchData = async () => {
+        const data = await fetch('https://namastedev.com/api/v1/listRestaurants')
+        const json = await data.json()
+        console.log(json.data.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
+        setListOfRestaurants(json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+    }
+
+    console.log("Body rendered")
     return (
         <div className="body">
             <div className="search-container">
@@ -21,7 +34,7 @@ const BodyComponent = () => {
             </div>
              <div className="res-container">
                {
-                listOfRestaurants.map((restaurant) => <RestaurantCard key={restaurant?.data?.id} resData={restaurant?.data} /> )
+                listOfRestaurants.map((restaurant, index) => <RestaurantCard key={`${restaurant?.info?.id} + ${index}`} resData={restaurant?.info} /> )
                }
 
 
@@ -29,5 +42,5 @@ const BodyComponent = () => {
         </div>
     )
 }
-
+ 
 export default BodyComponent
