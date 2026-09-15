@@ -99,3 +99,12 @@
     color: white;
     font-weight: bold;
 }
+
+.title-container {
+    background-color: #ccc;
+    /* display: flex; */
+}
+.menu-container{
+    display: flex;
+    justify-content: space-around;
+}

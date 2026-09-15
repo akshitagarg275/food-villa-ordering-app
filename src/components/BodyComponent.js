@@ -2,6 +2,7 @@ import React , {useState, useEffect} from "react"
 import RestaurantCard from "./RestaurantCard"
 import ShimmerComponent from "./ShimmerComponent"
 import { resList } from "../utils/restaurant_mock"
+import { Link } from "react-router-dom"
 const BodyComponent = () => {
 
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -9,11 +10,15 @@ const BodyComponent = () => {
     const [searchText, setSearchText] = useState("");
 
     const topRatesRetaurants = () => {
-        console.log("Top rated restaurants");
-        resList2 = resList.filter((res) => (Number(res?.data?.avgRating) > 4.0));
+        // console.log("Top rated restaurants", listOfRestaurants);
+
+        const resList2= listOfRestaurants.filter((res) => (Number(res?.info?.avgRating) > 4.0));
+        // console.log('res: ', resList2)
         setListOfRestaurants(resList2);
     }
 
+    //If no dependency array, useEffect called on every render
+    // If the dependency array is empty, than useEffect is called on initial render and just once
     useEffect(()=> {
         console.log('useEffect called')
         fetchData()
@@ -35,7 +40,7 @@ const BodyComponent = () => {
     }
 
 
-    // console.log("Body rendered")
+    console.log("Body rendered")
     return listOfRestaurants.length === 0 ? (
         <ShimmerComponent/>
     ) :  (
@@ -49,7 +54,7 @@ const BodyComponent = () => {
             </div>
              <div className="res-container">
                {
-                listOfRestaurants.map((restaurant, index) => <RestaurantCard key={`${restaurant?.info?.id} + ${index}`} resData={restaurant?.info} /> )
+                listOfRestaurants.map((restaurant, index) => <Link key={`${restaurant?.info?.id} + ${index}`} to={'/restaurants/'+restaurant?.info?.id}><RestaurantCard  resData={restaurant?.info} /></Link> )
                }
 
 
