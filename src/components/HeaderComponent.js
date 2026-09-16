@@ -24,6 +24,9 @@ const HeaderComponent = () => {
                 <li>
                     <Link to="/contact">Contact</Link>
                 </li>
+                <li>
+                    <Link to="/grocery">Grocery</Link>
+                </li>
                 <li>Cart</li>
                 <li><button onClick={() => {btnName === 'Login' ? setBtnName('Logout') : setBtnName('Login')}} className='sign-in-btn'>{btnName}</button></li>
             </ul>
