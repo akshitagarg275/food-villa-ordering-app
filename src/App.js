@@ -21,6 +21,8 @@ const AppLayout = () => {
 
 const Grocery = lazy(() => import("./components/Grocery"))
 
+const AboutComponent = lazy(() => import("./components/AboutUsComponent"))
+
 const appRouter = createBrowserRouter([
     {
         path: "/",
@@ -32,7 +34,7 @@ const appRouter = createBrowserRouter([
             },
             {
                 path:"/about",
-                element: <AboutUsComponent/>
+                element: <Suspense fallback={<h1>Loading</h1>}><AboutComponent/></Suspense>
             },
             {
                 path:"/contact",
