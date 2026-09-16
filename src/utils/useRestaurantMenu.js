@@ -8,7 +8,7 @@ const useRestaurantMenu = (resId) => {
     }, [])
 
     const fetchData = async () => {
-        const data = await fetch(`https://namastedev.com/api/v1/listRestaurantMenu/${restaurantId}`)
+        const data = await fetch(`https://namastedev.com/api/v1/listRestaurantMenu/${resId}`)
         const jsonData = await data.json()
         setResInfo(jsonData?.data)
     }

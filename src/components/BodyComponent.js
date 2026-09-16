@@ -56,7 +56,7 @@ const BodyComponent = () => {
             </div>
              <div className="res-container">
                {
-                listOfRestaurants.map((restaurant, index) => <Link key={`${restaurant?.info?.id} + ${index}`} to={'/restaurants/'+restaurant?.info?.id}><RestaurantCard  resData={restaurant?.info} /></Link> )
+                listOfRestaurants.map((restaurant, index) => <Link className='link' key={`${restaurant?.info?.id} + ${index}`} to={'/restaurants/'+restaurant?.info?.id}><RestaurantCard  resData={restaurant?.info} /></Link> )
                }
 
 
