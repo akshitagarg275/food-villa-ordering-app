@@ -3,11 +3,13 @@ import RestaurantCard from "./RestaurantCard"
 import ShimmerComponent from "./ShimmerComponent"
 import { resList } from "../utils/restaurant_mock"
 import { Link } from "react-router-dom"
+import useOnlineStatus from "../utils/useOnlineStatus"
 const BodyComponent = () => {
 
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
     const [filteredRestaurants, setFilteredRestaurants] = useState([]);
     const [searchText, setSearchText] = useState("");
+    const onlineStatus = useOnlineStatus()
 
     const topRatesRetaurants = () => {
         // console.log("Top rated restaurants", listOfRestaurants);
@@ -38,8 +40,8 @@ const BodyComponent = () => {
         const filterList = filteredRestaurants.filter((res) => res?.info?.name?.toLowerCase()?.includes(searchText.toLowerCase()))
         setListOfRestaurants(filterList)
     }
-
-
+    console.log(onlineStatus)
+    if (onlineStatus === false)  return <h1>Looks Like you are offline</h1>
     console.log("Body rendered")
     return listOfRestaurants.length === 0 ? (
         <ShimmerComponent/>
