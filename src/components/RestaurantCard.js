@@ -13,4 +13,19 @@ const RestaurantCard = ({ resData }) => {
     )
 }
 
+export const withVegLabel = (RestaurantCard) => {
+    //return another component
+    // resData will come here
+    return ({resData}) => {
+        // react functional component returns some piece of jsx
+        return (
+            <div>
+                <label className='label'>Veg</label>
+                <RestaurantCard resData={resData}/>
+            </div>
+        )
+
+    }
+}
+
 export default RestaurantCard

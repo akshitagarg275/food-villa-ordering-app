@@ -1,5 +1,5 @@
 import React , {useState, useEffect} from "react"
-import RestaurantCard from "./RestaurantCard"
+import RestaurantCard, {withVegLabel} from "./RestaurantCard"
 import ShimmerComponent from "./ShimmerComponent"
 import { resList } from "../utils/restaurant_mock"
 import { Link } from "react-router-dom"
@@ -10,6 +10,7 @@ const BodyComponent = () => {
     const [filteredRestaurants, setFilteredRestaurants] = useState([]);
     const [searchText, setSearchText] = useState("");
     const onlineStatus = useOnlineStatus()
+    const RestaurantCardVeg = withVegLabel(RestaurantCard)
 
     const topRatesRetaurants = () => {
         // console.log("Top rated restaurants", listOfRestaurants);
@@ -32,7 +33,7 @@ const BodyComponent = () => {
         console.log(json.data.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
         setListOfRestaurants(json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
         setFilteredRestaurants(json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
-
+        console.log('Restro:', listOfRestaurants)
     }
 
     const searchFunctionality = () => {
@@ -42,7 +43,7 @@ const BodyComponent = () => {
     }
     console.log(onlineStatus)
     if (onlineStatus === false)  return <h1>Looks Like you are offline</h1>
-    console.log("Body rendered")
+    console.log("Body rendered: ",listOfRestaurants)
     return listOfRestaurants.length === 0 ? (
         <ShimmerComponent/>
     ) :  (
@@ -56,7 +57,12 @@ const BodyComponent = () => {
             </div>
              <div className="res-container">
                {
-                listOfRestaurants.map((restaurant, index) => <Link className='link' key={`${restaurant?.info?.id} + ${index}`} to={'/restaurants/'+restaurant?.info?.id}><RestaurantCard  resData={restaurant?.info} /></Link> )
+                listOfRestaurants.map((restaurant, index) => 
+                    <Link className='link' key={`${restaurant?.info?.id} + ${index}`} to={'/restaurants/'+restaurant?.info?.id}>
+                        {
+                            restaurant.info.veg ? <RestaurantCardVeg resData={restaurant?.info}/> : <RestaurantCard  resData={restaurant?.info} />
+                        }
+                    </Link> )
                }
 
 

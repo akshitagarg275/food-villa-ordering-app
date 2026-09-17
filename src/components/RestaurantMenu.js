@@ -7,7 +7,7 @@ const RestaurantMenu = () => {
     const params = useParams()
     console.log('params', params)
     const {resId} = useParams()
-    const resInfo = useRestaurantMenu("123456")
+    const resInfo = useRestaurantMenu(resId)
     
 
     if (resInfo === null) return  <ShimmerComponent/>
