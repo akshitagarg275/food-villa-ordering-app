@@ -5,6 +5,9 @@ import useRestaurantMenu from '../utils/useRestaurantMenu'
 import RestaurantCategory from './RestaurantCategory'
 
 const RestaurantMenu = () => {
+    const [showItems, setShowItems] = useState(0)
+
+    const [showIndex, setShowIndex] = useState(0)
     const params = useParams()
     console.log('params', params)
     const {resId} = useParams()
@@ -30,8 +33,14 @@ const RestaurantMenu = () => {
         
         <div>
     {categories.map((category, idx) => {
+      {/*Controlled component */}
       return (
-       <RestaurantCategory key={`category?.card?card?.title-${idx}`} data={category?.card?.card}/>
+       <RestaurantCategory 
+        key={`category?.card?card?.title-${idx}`} 
+        data={category?.card?.card} 
+        showItems={idx===showIndex && true}
+        setShowIndex = {() => setShowIndex(idx)}
+       />
       );
     })}
   </div>
