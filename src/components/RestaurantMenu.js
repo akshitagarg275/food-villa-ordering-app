@@ -1,17 +1,25 @@
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ShimmerComponent from './ShimmerComponent'
 import { useParams } from 'react-router-dom'
 import useRestaurantMenu from '../utils/useRestaurantMenu'
 import RestaurantCategory from './RestaurantCategory'
 
 const RestaurantMenu = () => {
-    const [showItems, setShowItems] = useState(0)
-
-    const [showIndex, setShowIndex] = useState(0)
+    const [showIndex, setShowIndex] = useState(null)
     const params = useParams()
     console.log('params', params)
     const {resId} = useParams()
     const resInfo = useRestaurantMenu(resId)
+
+    const handleShowIndex = (idx) => {
+      if (idx === showIndex) {
+        console.log(idx,showIndex)
+        setShowIndex(null)
+      } else {
+        setShowIndex(idx)
+      }
+      
+    }
     
 
     if (resInfo === null) return  <ShimmerComponent/>
@@ -39,7 +47,7 @@ const RestaurantMenu = () => {
         key={`category?.card?card?.title-${idx}`} 
         data={category?.card?.card} 
         showItems={idx===showIndex && true}
-        setShowIndex = {() => setShowIndex(idx)}
+        setShowIndex = {() => handleShowIndex(idx)}
        />
       );
     })}
