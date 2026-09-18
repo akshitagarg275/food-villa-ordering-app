@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from 'react'
 import ShimmerComponent from './ShimmerComponent'
 import { useParams } from 'react-router-dom'
 import useRestaurantMenu from '../utils/useRestaurantMenu'
+import RestaurantCategory from './RestaurantCategory'
 
 const RestaurantMenu = () => {
     const params = useParams()
@@ -13,41 +14,24 @@ const RestaurantMenu = () => {
     if (resInfo === null) return  <ShimmerComponent/>
     const {name, cuisines, costForTwoMessage,avgRating} = resInfo?.cards[2]?.card?.card?.info
     const menuCategories = resInfo.cards[4].groupedCard.cardGroupMap.REGULAR.cards;
+    console.log('menu categories: ', menuCategories)
     const categories = menuCategories.filter((category) => category?.card?.card?.title)
-    console.log(menuCategories)
+    console.log('categories: ', categories)
     const menuTitle = menuCategories.map((menu)=>menu?.card?.card?.title ).filter((menu)=>menu)
     console.log(menuTitle)
     const itemCards= menuCategories[1]?.card?.card?.itemCards
     console.log("item",itemCards)
   return (
     <div className='menu'>
-        <h1>{name}</h1>
-        <p>{cuisines.join(',')} - {costForTwoMessage}</p>
-        <h5>Rating: {avgRating}</h5>
-        <h2>Menu</h2>
+        <h1 className="text-center font-bold my-10 text-2xl">{name}</h1>
+        <p className='text-center font-bold text-lg'>{cuisines.join(',')} - {costForTwoMessage}</p>
+        <h5 className='text-center font-bold text-lg'>Rating: {avgRating}</h5>
+        <h2 className='mx-auto w-6/12 font-bold text-lg text-yellow-600'>Menu</h2>
         
         <div>
-    {categories.map((category) => {
-      const { title, itemCards } = category?.card?.card;
-
+    {categories.map((category, idx) => {
       return (
-        <div className='title-container' key={title}>
-          <h2>{title}</h2>
-
-          {itemCards.map((item) => {
-            const info = item.card.info;
-
-            return (
-              <div  key={info.id}>
-                <h3>{info.name}</h3>
-                <div className='menu-container'>
-                    <p>{info.description}</p>
-                    <p>₹{info.price / 100}</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+       <RestaurantCategory key={`category?.card?card?.title-${idx}`} data={category?.card?.card}/>
       );
     })}
   </div>
